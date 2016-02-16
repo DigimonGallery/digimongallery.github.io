@@ -176,7 +176,7 @@ $( document ).ready(function() {
                 var row = document.createElement("DIV");
                 row.className = "row";
                 var info = infoString(digimonList[dname], false);
-                row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle responsive-img' src='images/digimon/" + dname + ".png' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
+                row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle responsive-img' src='images/digimon/" + dname + ".PNG' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
                 column3.appendChild(row);
             }else{
                 var row = document.createElement("DIV");
@@ -191,7 +191,7 @@ $( document ).ready(function() {
                 var row = document.createElement("DIV");
                 row.className = "row";
                 var info = infoString(digimonList[dname], false);
-                row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle responsive-img' src='images/digimon/" + dname + ".png' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
+                row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle responsive-img' src='images/digimon/" + dname + ".PNG' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
                 column1.appendChild(row);
             }else{
                 var row = document.createElement("DIV");
@@ -204,7 +204,7 @@ $( document ).ready(function() {
         row.className = "row";
         //
         var info = infoString(d, true);
-        row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + d.name.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + d.name + "</b></span></div><div class='col s3'><img class='circle responsive-img' src='images/digimon/" + d.name + ".png' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
+        row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + d.name.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + d.name + "</b></span></div><div class='col s3'><img class='circle responsive-img' src='images/digimon/" + d.name + ".PNG' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
         column2.appendChild(row);
         outerrow.appendChild(column1);
         outerrow.appendChild(column2);
