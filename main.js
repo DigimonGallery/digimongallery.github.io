@@ -132,13 +132,13 @@ function blurAll(){
 }
 
 function jump(name) {
-    window.location = "#" + name;
+    window.location = "#" + name.replace(" ", "");
 }
 
 $( document ).ready(function() {
     var callback = function(){
         blurAll();
-        window.location = "#" + $("#search").val().toLowerCase();
+        window.location = "#" + $("#search").val().replace(" ", "").toLowerCase();
     }
     for(var name in digimonList) {
         var d = digimonList[name];
