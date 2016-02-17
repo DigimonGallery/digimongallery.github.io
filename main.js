@@ -235,7 +235,6 @@ var selectedDigimon = "";
 
 var changePage = function(name){
     pageName = name;
-    console.log(name);
     document.getElementById("website").removeChild(document.getElementById("digimonList"));
     var dList = document.createElement("DIV");
     dList.id="digimonList";
@@ -252,8 +251,6 @@ function loadPage(){
         }else if(pageName == "mobile" || pageName == "home"){
             blurAll();
             selectedDigimon = $("#search").val().replace(" ", "").toLowerCase();
-            console.log(selectedDigimon);
-            changePage("mobile");
         }
     }
     
