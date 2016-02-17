@@ -150,7 +150,7 @@ function createDigimonCard(dname, stats, reqs){
     var row = document.createElement("DIV");
     row.className = "row";
     var info = infoString(digimonList[dname], stats, reqs);
-    row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle responsive-img' src='images/digimon/" + dname + ".PNG' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
+    row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle' src='images/digimon/" + dname + ".PNG' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
     return row;
 }
 
