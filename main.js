@@ -251,6 +251,7 @@ function loadPage(){
         }else if(pageName == "mobile" || pageName == "home"){
             blurAll();
             selectedDigimon = $("#search").val().replace(" ", "").toLowerCase();
+            changePage("mobile");
         }
     }
     
