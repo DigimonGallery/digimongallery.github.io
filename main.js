@@ -95,6 +95,9 @@ var statsString = function(d, info){
 };
 
 var reqsString = function(d, info){
+    if(d.requirements.level != "-1"){
+        info += "<h6><b>" + "Level: " + d.requirements.level + "</b></h6>";
+    }
     if(d.requirements.hp != "-1"){
         info += "<h6>" + "Max HP: " + d.requirements.hp + "</h6>";
     }
