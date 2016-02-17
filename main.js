@@ -32,6 +32,8 @@ function digimonRequirements(level, hp, sp, atk, def, int, spd, abi, cam, type, 
     this.notes = notes;
 }
 
+var firstRun = true;
+
 var i = 0;
 var digimonList = new Array();
 
@@ -300,11 +302,14 @@ function loadPage(){
         }
     } 
     
-    var searchbar = document.getElementById("searchbar");
-    if(searchbar.addEventListener){
-        searchbar.addEventListener("submit", callback, false);  //Modern browsers
-    }else if(searchbar.attachEvent){
-        searchbar.attachEvent('onsubmit', callback);            //Old IE
+    if(firstRun){
+        firstRun = false;
+        var searchbar = document.getElementById("searchbar");
+        if(searchbar.addEventListener){
+            searchbar.addEventListener("submit", callback, false);  //Modern browsers
+        }else if(searchbar.attachEvent){
+            searchbar.attachEvent('onsubmit', callback);            //Old IE
+        }
     }
     
     $('.collapsible').collapsible({
