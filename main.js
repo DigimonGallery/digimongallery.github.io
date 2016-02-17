@@ -203,7 +203,7 @@ function createDigimonSection(d){
     for(var dindex = 0; dindex < d.degeneratesTo.length; dindex++){
         dname = d.degeneratesTo[dindex];
         if(dname != "" && dname != " "){
-            var row = createDigimonCard(dname, true, false);
+            var row = createDigimonCard(dname, false, true);
             column1.appendChild(row);
         }else{
             var row = document.createElement("DIV");
