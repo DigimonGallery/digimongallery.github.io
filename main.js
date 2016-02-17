@@ -246,7 +246,7 @@ function loadPage(){
         if(pageName == "desktop"){
             blurAll();
             window.location = "#" + $("#search").val().replace(" ", "").toLowerCase();
-        }else if(pageName == "mobile"){
+        }else if(pageName == "mobile" || pageName == "home"){
             blurAll();
             selectedDigimon = $("#search").val().replace(" ", "").toLowerCase();
             console.log(selectedDigimon);
