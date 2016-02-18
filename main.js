@@ -49,7 +49,7 @@ for (i; i < digimonStrings.length; i = i + 1) {
     var digivolvesTo = unparsedString[4].split(",");
     var degeneratesTo = unparsedString[5].split(",");
     var d = new digimon(name, gen, stats, requirements, digivolvesTo, degeneratesTo);
-    digimonList[name.replace(" ", "").toLowerCase()] = d;
+    digimonList[name.replace(/ /g, "").toLowerCase()] = d;
 }
 
 var infoString = function(d, stats, req){
@@ -139,29 +139,38 @@ function blurAll(){
 }
 
 function jump(name) {
-    if(pageName == "mobile"){
+    if(pageName == "single"){
         if(name != ""){
-            selectedDigimon = name.replace(" ", "").toLowerCase();
-            changePage("mobile");            
+            selectedDigimon = name.replace(/ /g, "").toLowerCase();
+            changePage("single");
+            window.location = "#" + name.replace(/ /g, "");
         }else{
-            window.location = "#" + name.replace(" ", "");
+            window.location = "#" + name.replace(/ /g, "");
+        }
+    }else if(pageName =="mobile"){
+        if(name != ""){
+            selectedDigimon = name.replace(/ /g, "").toLowerCase();
+            changePage("mobile");
+            window.location = "#" + name.replace(/ /g, "");
+        }else{
+            window.location = "#" + name.replace(/ /g, "");
         }
     }else{
-        window.location = "#" + name.replace(" ", "");
+        window.location = "#" + name.replace(/ /g, "");
     }
 }
 
 function createDigimonCard(dname, stats, reqs){
     var row = document.createElement("DIV");
     row.className = "row";
-    var info = infoString(digimonList[dname.replace(" ", "").toLowerCase()], stats, reqs);
-    row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(" ", "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle' src='images/digimon/" + dname + ".PNG' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
+    var info = infoString(digimonList[dname.replace(/ /g, "").toLowerCase()], stats, reqs);
+    row.innerHTML = "<div class='col s12'><div class='card hoverable blue waves-effect waves-light' onclick='jump(\"" + dname.replace(/ /g, "").toLowerCase() + "\")' style='width:100%'><div class=\"card-content black-text left-align\"><div class='row'><div class='col s9'><span class=\"card-title\"><b>" + dname + "</b></span></div><div class='col s3'><img class='circle' src='images/digimon/" + dname + ".PNG' style='height:100%;width:100%'></div></div><div class=\"divider blue darken-2\"></div>" + info + "</div></div></div>";
     return row;
 }
 
 function createDigimonSection(d){
     var bigrow = document.createElement("DIV");
-    bigrow.id = d.name.toLowerCase().replace(" ", "");
+    bigrow.id = d.name.toLowerCase().replace(/ /g, "");
     bigrow.className = "row";
     var tabletop = document.createElement("DIV");
     tabletop.className = "row blue card-panel";
@@ -235,7 +244,7 @@ var pageName = "home";
 
 var selectedDigimon = "";
 
-var changePage = function(name){
+var changePage = function(name){  
     pageName = name;
     document.getElementById("website").removeChild(document.getElementById("digimonList"));
     var dList = document.createElement("DIV");
@@ -249,35 +258,48 @@ function loadPage(){
     var callback = function(){
         if(pageName == "desktop"){
             blurAll();
-            window.location = "#" + $("#search").val().replace(" ", "").toLowerCase();
-        }else if(pageName == "mobile" || pageName == "home"){
+            window.location = "#" + $("#search").val().replace(/ /g, "").toLowerCase();
+        }else if(pageName == "single" || pageName == "home"){
+            selectedDigimon = $("#search").val().replace(/ /g, "").toLowerCase();
+            changePage("single");
             blurAll();
-            selectedDigimon = $("#search").val().replace(" ", "").toLowerCase();
+            window.location = "#" + $("#search").val().replace(/ /g, "").toLowerCase();
+        }else if(pageName == "mobile"){
+            selectedDigimon = $("#search").val().replace(/ /g, "").toLowerCase();
             changePage("mobile");
+            blurAll();
+            window.location = "#" + $("#search").val().replace(/ /g, "").toLowerCase();
+            jump("");
         }
     }
     
     if(pageName == "home"){
+        var sp = document.createElement("P");
         var row = document.createElement("DIV");
         row.className = "row";
         row.id = "buttons";
-        var inside = "<div class='col l6 s10 push-s1 amber-text text-lighten-2'><div class='card-panel hoverable blue darken-3 waves-effect waves-light' onclick='changePage(\"mobile\")'><p class='flow-text'>Single Digimon</p><div class='divider amber lighten-2'></div><p><h6>View a single digimon per same page (works well with mobile or slower computers).</h6></p></div></div><div class='col l6 s10 push-s1 amber-text text-lighten-2'><div class='card-panel hoverable blue darken-3 waves-effect waves-light' onclick='changePage(\"desktop\")'><p class='flow-text'>All Digimon</p><div class='divider amber lighten-2'></div><p><h6>View every digimon on the same page (does not work well with mobile or slower computers).</h6></p></div></div>";
+        var inside = "<div class='col l6 s10 push-s1 amber-text text-lighten-2'><div class='card-panel hoverable blue darken-3 waves-effect waves-light' onclick='changePage(\"single\")'><p class='flow-text'>Single Digimon</p><div class='divider amber lighten-2'></div><p><h6>View a single digimon per same page (works well with slower computers and slower internet connections).</h6></p></div></div><div class='col l6 s10 push-s1 amber-text text-lighten-2'><div class='card-panel hoverable blue darken-3 waves-effect waves-light' onclick='changePage(\"desktop\")'><p class='flow-text'>All Digimon</p><div class='divider amber lighten-2'></div><p><h6>View all digimon on the same page (does not work well with slower computers or slower internet connections).</h6></p></div></div><div class='col l6 s10 push-s1 push-l3 amber-text text-lighten-2'><div class='card-panel hoverable blue darken-3 waves-effect waves-light' onclick='changePage(\"mobile\")'><p class='flow-text'>Mobile Friendly</p><div class='divider amber lighten-2'></div><p><h6>View a single digimon per same page (Due to the different layout, this is intended for mobile browsers with smaller screens).</h6></p></div></div>";
         row.innerHTML = inside;
+        document.getElementById("digimonList").appendChild(sp);
         document.getElementById("digimonList").appendChild(row);
     }else if(pageName == "desktop"){
+        var sp = document.createElement("P");
         var row = document.createElement("DIV");
         row.className = "row";
         row.id = "buttons";
         var inside = "<div class='col s12 amber-text text-lighten-2 flow-text'><span class='flow-text'><div class='card-panel hoverable blue darken-3 waves-effect waves-light col s12' onclick='changePage(\"home\")'><p>RETURN</p></div></span></div>";
         row.innerHTML = inside;
+        document.getElementById("digimonList").appendChild(sp);
         document.getElementById("digimonList").appendChild(row);
         createAllDigimon();
-    }else if(pageName == "mobile"){
+    }else if(pageName == "single"){
+        var sp = document.createElement("P");
         var row = document.createElement("DIV");
         row.className = "row";
         row.id = "buttons";
         var inside = "<div class='col s12 amber-text text-lighten-2 flow-text'><span class='flow-text'><div class='card-panel hoverable blue darken-3 waves-effect waves-light col s12' onclick='changePage(\"home\")'><p>RETURN</p></div></span></div>";
         row.innerHTML = inside;
+        document.getElementById("digimonList").appendChild(sp);
         document.getElementById("digimonList").appendChild(row);
         if(selectedDigimon == ""){
             var row1 = document.createElement("DIV");
@@ -287,8 +309,8 @@ function loadPage(){
             row1.innerHTML = inside1;
             document.getElementById("digimonList").appendChild(row1);
         }else{
-            if(digimonList[selectedDigimon.replace(" ", "").toLowerCase()] != undefined){
-                var d = digimonList[selectedDigimon.replace(" ", "").toLowerCase()];
+            if(digimonList[selectedDigimon.replace(/ /g, "").toLowerCase()] != undefined){
+                var d = digimonList[selectedDigimon.replace(/ /g, "").toLowerCase()];
                 document.getElementById("digimonList").appendChild(createDigimonSection(d));
                 jump("");
             }else{
@@ -300,7 +322,87 @@ function loadPage(){
                 document.getElementById("digimonList").appendChild(row1);
             }
         }
-    } 
+    }else if(pageName == "mobile"){
+        var sp = document.createElement("P");
+        var row = document.createElement("DIV");
+        row.className = "row";
+        row.id = "buttons";
+        var inside = "<div class='col s12 amber-text text-lighten-2 flow-text'><span class='flow-text'><div class='card-panel hoverable blue darken-3 waves-effect waves-light col s12' onclick='changePage(\"home\")'><p>RETURN</p></div></span></div>";
+        row.innerHTML = inside;
+        document.getElementById("digimonList").appendChild(sp);
+        document.getElementById("digimonList").appendChild(row);
+        if(selectedDigimon == ""){
+            var row1 = document.createElement("DIV");
+            row1.className = "row";
+            row1.id = "info";
+            var inside1 = "<div class='col s12 amber-text text-lighten-2 flow-text'><span class='flow-text'><div class='card-panel blue darken-1 col s12'><p>Type a digimon name into the search bar and press enter.</p></div></span></div>";
+            row1.innerHTML = inside1;
+            document.getElementById("digimonList").appendChild(row1);
+        }else{
+            if(digimonList[selectedDigimon.replace(/ /g, "").toLowerCase()] != undefined){
+                var d = digimonList[selectedDigimon.replace(/ /g, "").toLowerCase()];
+                var column1 = document.createElement("DIV");
+                column1.className = "col l4 m10 s12 push-m1";
+                {
+                    var header = document.createElement("DIV");
+                    header.className = "row card-panel blue darken-2 hoverable";
+                    header.innerHTML = "Current Digimon"
+                    column1.appendChild(header);
+                    var digimoncard = document.createElement("DIV");
+                    var dname = d.name;
+                    column1.appendChild(createDigimonCard(dname, true, true));
+                }
+                var column2 = document.createElement("DIV");
+                column2.className = "col l4 m10 s12 push-m1";
+                {
+                    var first = true;
+                    for(var dindex in d.digivolvesTo){
+                        var dname = d.digivolvesTo[dindex];
+                        if(dname != "" && dname != " "){
+                            if(first){
+                                first = false;
+                                var header = document.createElement("DIV");
+                                header.className = "row card-panel blue darken-2 hoverable";
+                                header.innerHTML = "Digivolutions"
+                                column2.appendChild(header);
+                            }
+                            column2.appendChild(createDigimonCard(dname, false, true));
+                        }
+                    }
+                }
+                var column3 = document.createElement("DIV");
+                column3.className = "col l4 m10 s12 push-m1";
+                {
+                    var first = true;
+                    for(var dindex in d.degeneratesTo){
+                        var dname = d.degeneratesTo[dindex];
+                        if(dname != "" && dname != " "){
+                            if(first){
+                                first = false;
+                                var header = document.createElement("DIV");
+                                header.className = "row card-panel blue darken-2 hoverable";
+                                header.innerHTML = "Degenerations"
+                                column3.appendChild(header);
+                            }
+                            column3.appendChild(createDigimonCard(dname, false, true));
+                        }
+                    }
+                    
+                }
+                document.getElementById("digimonList").appendChild(column1);
+                document.getElementById("digimonList").appendChild(column2);
+                document.getElementById("digimonList").appendChild(column3);
+                
+            }else{
+                var row1 = document.createElement("DIV");
+                row1.className = "row";
+                row1.id = "info";
+                var inside1 = "<div class='col l10 push-l1 s12 amber-text text-lighten-2 flow-text'><span class='flow-text'><div class='card-panel blue darken-1 col s12'><p>Invalid digimon name.</p></div></span></div><div class='col s12 amber-text text-lighten-2 flow-text'><span class='flow-text'><div class='card-panel blue darken-1 col s12'><p>Type a digimon name into the search bar and press enter.</p></div></span></div>";
+                row1.innerHTML = inside1;
+                document.getElementById("digimonList").appendChild(row1);
+            }
+        }
+    }
     
     if(firstRun){
         firstRun = false;
@@ -316,6 +418,17 @@ function loadPage(){
         accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style work
     });
     $(".button-collapse").sideNav();
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
 }
 
 $( document ).ready(function() {
